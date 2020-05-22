@@ -95,6 +95,18 @@ function blockColor() {
     }
   });
 }
+//  Save to local storage once a button is clicked
+
+$(".saveBtn").click(function () {
+  words = $(this).siblings(".textarea").val();
+  console.log(words);
+  hourInfo = $(this).siblings(".hour").text();
+  console.log(hourInfo);
+  localStorage.setItem(hourInfo, JSON.stringify(words));
+
+  blockColor();
+  renderText();
+});
 
 // using moment.js display current time
 //console.log(moment().format("MMMM Do YYYY, h:mm:ss a"));
