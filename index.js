@@ -15,6 +15,59 @@
 
 //  I will first make sure javascript doesn't run until the HTML is finished loading
 
+$(document).ready(function () {
+  // using moment.js
+  //console.log(moment().format("MMMM Do YYYY, h:mm:ss a"));
+  $("#currentDay").text(moment().format("MMMM Do YYYY, h:mm:ss a"));
+
+  // addtext();
+
+  // const m = moment();
+
+  // creating my array to add into html
+  var timeBlocks = [
+    "9:00AM",
+    "10:00AM",
+    "11:00AM",
+    "12:00PM",
+    "1:00PM",
+    "2:00PM",
+    "3:00PM",
+    "4:00PM",
+    "5:00PM",
+  ];
+
+  // created a for loop to iterate through my timeblock array and add all my timeblocks to the webpage
+  for (var i = 0; i < timeBlocks.length; i++) {
+    // Declare variables for the elements you want to add in your container html
+    var addRow = $("<div>");
+    var addColumn = $("<div>");
+    var addTextArea = $("<textarea>");
+    var addSaveButton = $("<button>");
+    var addSaveHover = $("<i>");
+
+    // add classes to each element on html page
+    addRow.addClass("row");
+    addColumn.addClass("time-block hour col-2 description");
+    addTextArea.addClass("textarea col-8");
+    // this below took me a while to figure out. I wanted to parseInt but didn't
+    addTextArea.attr("id", timeBlocks.indexOf(timeBlocks[i]));
+    addSaveButton.addClass("saveBtn col-2");
+    addSaveHover.addClass("far fa-save");
+
+    // add text to your column div
+    addColumn.text(timeBlocks[i]);
+
+    // append your new Elements with their attached classes to html page
+
+    $("#blocks").append(addRow);
+    addRow.append(addColumn);
+    addRow.append(addTextArea);
+    addRow.append(addSaveButton);
+    addSaveButton.append(addSaveHover);
+  }
+});
+
 // using moment.js display current time
 //console.log(moment().format("MMMM Do YYYY, h:mm:ss a"));
 
