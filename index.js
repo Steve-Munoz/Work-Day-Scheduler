@@ -13,6 +13,9 @@
 // THEN the saved events persist
 // ```
 
+//var words;
+//var hourInfo;
+
 //  I will first make sure javascript doesn't run until the HTML is finished loading
 
 $(document).ready(function () {
@@ -50,8 +53,10 @@ $(document).ready(function () {
     addRow.addClass("row");
     addColumn.addClass("time-block hour col-2 description");
     addTextArea.addClass("textarea col-8");
-    // this below took me a while to figure out. I wanted to parseInt but didn't
-    addTextArea.attr("id", timeBlocks.indexOf(timeBlocks[i]));
+    // this below took me a while to figure out. I'ts still not doing what I want it to do
+    //It's assgining each of my timeblocks an ID with the number of the index it's currently
+    //.. on in my for loop
+    addTextArea.attr("data-hour", timeBlocks.indexOf(timeBlocks[i]));
     addSaveButton.addClass("saveBtn col-2");
     addSaveHover.addClass("far fa-save");
 
@@ -69,8 +74,14 @@ $(document).ready(function () {
 
   // call Functions
   blockColor();
+  renderText();
 });
 
+// I will write my functions below
+
+// This function below will determine what color my block will be
+// Each block will be color coded to indicate if the block that I am currently in
+// is in the past present or future
 function blockColor() {
   //var timeTest = addTextArea.val();
   var currentTime = moment().format("h");
@@ -95,12 +106,16 @@ function blockColor() {
     }
   });
 }
-//  Save to local storage once a button is clicked
 
-$(".saveBtn").click(function () {
-  words = $(this).siblings(".textarea").val();
+//  Save to local storage once a button is clicked
+//  I do not know why this below is not working, I feel like the code is right
+//
+
+$(".saveBtn").on("click", function () {
+  var textarea = $(".textarea");
+  var words = $(this).siblings(textarea).val();
   console.log(words);
-  hourInfo = $(this).siblings(".hour").text();
+  var hourInfo = $(this).siblings(".hour").text();
   console.log(hourInfo);
   localStorage.setItem(hourInfo, JSON.stringify(words));
 
@@ -108,21 +123,40 @@ $(".saveBtn").click(function () {
   renderText();
 });
 
-// using moment.js display current time
-//console.log(moment().format("MMMM Do YYYY, h:mm:ss a"));
+// create a function to make sure your text in time block is saved and displayed on the webpage
 
-// create an array to add into html
+function renderText() {
+  var saveWords9 = JSON.parse(localStorage.getItem("9:00AM"));
 
-// create a for loop to iterate through my timeblock array and add all my timeblocks to the webpage
+  $("#0").val(saveWords9);
 
-// Declare variables for the elements you want to add in your container html
+  var saveWords10 = JSON.parse(localStorage.getItem("10:00AM"));
 
-// add classes to each element on html page
+  $("#1").val(saveWords10);
 
-// append your new Elements with their attached classes to html page
+  var saveWords11 = JSON.parse(localStorage.getItem("11:00AM"));
 
-// I will write my functions below
+  $("#2").val(saveWords11);
 
-//  Save to local storage once a button is clicked
+  var saveWords12 = JSON.parse(localStorage.getItem("12:00PM"));
 
-// create a function to make sure your text in time block is saved and displayed on the webpage.
+  $("#3").val(saveWords12);
+
+  var saveWords1 = JSON.parse(localStorage.getItem("1:00PM"));
+
+  $("#4").val(saveWords1);
+
+  var saveWords2 = JSON.parse(localStorage.getItem("2:00PM"));
+
+  $("#5").val(saveWords2);
+
+  $("#6").val(saveWords3);
+
+  var saveWords4 = JSON.parse(localStorage.getItem("4:00PM"));
+
+  $("#7").val(saveWords4);
+
+  var saveWords5 = JSON.parse(localStorage.getItem("5:00PM"));
+
+  $("#8").val(saveWords5);
+}
