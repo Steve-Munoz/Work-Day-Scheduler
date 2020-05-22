@@ -66,7 +66,35 @@ $(document).ready(function () {
     addRow.append(addSaveButton);
     addSaveButton.append(addSaveHover);
   }
+
+  // call Functions
+  blockColor();
 });
+
+function blockColor() {
+  //var timeTest = addTextArea.val();
+  var currentTime = moment().format("h");
+  console.log(currentTime);
+  $(".textarea").each(function () {
+    // CODE ABOVE- "this" will be targeting the element textarea which there is
+    //is a class called textarea and an ID for each textarea in each timeblock
+    //console.log(this);
+    //With code "this" below I am targeting the textarea element to get its ID
+    //and then creating an if statement to add a class to a specific ID
+    // If the current time is less than then the time
+
+    var blockTime = parseInt($(this).attr("id"));
+    console.log(blockTime);
+
+    if (currentTime > blockTime) {
+      $(this).addClass("past");
+    } else if (currentTime < blockTime) {
+      $(this).addClass("future");
+    } else {
+      $(this).addClass("present");
+    }
+  });
+}
 
 // using moment.js display current time
 //console.log(moment().format("MMMM Do YYYY, h:mm:ss a"));
